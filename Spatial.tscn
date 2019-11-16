@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Spatial.gd" type="Script" id=1]
+[ext_resource path="res://Platform_Objects/BlockLarge.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Platform_Objects/Block_Cliff.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Platform_Objects/BlockSlope.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Platform_Objects/BlockLevel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Platform_Objects/BlockHalfSlope.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Platform_Objects/BlockHex.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Character.tscn" type="PackedScene" id=8]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.160784, 0.396078, 0.0666667, 1 )
+
+[sub_resource type="PlaneMesh" id=2]
+material = SubResource( 1 )
+size = Vector2( 10, 10 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( 5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, -5 )
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+shape = SubResource( 3 )
+
+[node name="CameraHub" type="Spatial" parent="."]
+transform = Transform( 0.995535, 0, 0.0943902, 0, 1, 0, -0.0943902, 0, 0.995535, 0, 0, 0 )
+
+[node name="Camera" type="Camera" parent="CameraHub"]
+transform = Transform( 0.998461, 0.0463768, 0.0304245, -0.0530362, 0.637707, 0.768451, 0.0162364, -0.768882, 0.639185, 0.398241, 6.57517, 4.80636 )
+fov = 44.6888
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.99111, 0.0553836, 0.120967, -0.0363368, -0.761978, 0.646583, 0.127984, -0.645231, -0.753192, -0.0208216, 3.39041, -3.41193 )
+shadow_enabled = true
+
+[node name="BlockLarge" parent="." instance=ExtResource( 2 )]
+
+[node name="BlockLarge2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+
+[node name="BlockLarge3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.5 )
+
+[node name="BlockCliff" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16728, 0, 1 )
+
+[node name="BlockCliff2" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.332716, 0, 1 )
+
+[node name="BlockCliff3" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.667284, 0, 1 )
+
+[node name="BlockSlope" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1.31134e-007, 0, -1, 0, 1, 0, 1, 0, 1.31134e-007, 2, 0, -2 )
+
+[node name="BlockSlope2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1.31134e-007, 0, -1, 0, 1, 0, 1, 0, 1.31134e-007, 2, 0, -1 )
+
+[node name="BlockSlope3" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 1, 0, -2 )
+
+[node name="BlockLevel" parent="." instance=ExtResource( 5 )]
+transform = Transform( 6.70552e-008, 0, -1, 0, 1, 0, 1, 0, 6.70552e-008, -1, 0.5, -3.5 )
+
+[node name="BlockLevel2" parent="." instance=ExtResource( 5 )]
+transform = Transform( -1, 0, -2.33438e-008, 0, 1, 0, 2.33438e-008, 0, -1, 1, 0.5, -3.5 )
+
+[node name="BlockHalfSlope" parent="." instance=ExtResource( 6 )]
+transform = Transform( -1, 0, -8.74228e-008, 0, 1, 0, 8.74228e-008, 0, -1, 0.5, 1, -3 )
+
+[node name="BlockHalfSlope2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1.31134e-007, 0, -1, 0, 1, 0, 1, 0, 1.31134e-007, -1, 1, -1.5 )
+
+[node name="BlockHex" parent="BlockHalfSlope2" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-007, 0, 1.5 )
+
+[node name="BlockHex2" parent="BlockHalfSlope2" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0026145, 0.469578, 3.40691 )
+
+[node name="Character" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.613301, 2.98594 )
